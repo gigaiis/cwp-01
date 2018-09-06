@@ -5,6 +5,21 @@ const DIR_PATH = process.argv[2];
 const EXTENSION = '.txt';
 let	  COPYRIGHT;
 
+(() => {
+    fs.access(
+    	DIR_PATH, 
+    	(e) => {
+            if (e) { console.log("Path access error: " + e); }
+            else {
+                createSummaryScript();
+                getCopyright();
+                copyTXT(DIR_PATH, createDirForTXT());
+                getChanges();
+            }
+        }
+    )
+})();
+
 function createDirForTXT() {
     let DIR = `${DIR_PATH}\\${path.basename(DIR_PATH)}`;
     fs.mkdir(DIR, (callback) => {
