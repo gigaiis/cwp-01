@@ -4,7 +4,16 @@ var path = require('path');
 const DIR_PATH = process.argv[2];
 const EXTENSION = '.txt';
 
-
+function createDirForTXT() {
+    let DIR = `${DIR_PATH}\\${path.basename(DIR_PATH)}`;
+    fs.mkdir(DIR, (callback) => {
+        if (callback) {
+            console.log("Error create dir for txt: " + callback);
+            throw callback;
+        }
+    });
+    return DIR;
+}
 
 function createSummaryScript() {
     fs.writeFile(
