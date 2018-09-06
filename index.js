@@ -3,6 +3,7 @@ var path = require('path');
 
 const DIR_PATH = process.argv[2];
 const EXTENSION = '.txt';
+let	  COPYRIGHT;
 
 function createDirForTXT() {
     let DIR = `${DIR_PATH}\\${path.basename(DIR_PATH)}`;
@@ -40,4 +41,14 @@ function createSummaryScript() {
 	        if (callback) { console.log("Error create summary script: " + callback); }
 	    }
 	);
+}
+
+function getCopyright() {
+    fs.readFile("config.json", (e, d) => {
+        if (e) {
+            console.log("Error read file: " + e);
+            copyright = '#DEFAULT#COPYRIGHT#WREST#2018#';
+        }
+        else { copyright = JSON.parse(d); }
+    })
 }
