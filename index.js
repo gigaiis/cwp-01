@@ -53,6 +53,28 @@ function getCopyright() {
     })
 }
 
+function copyTXT(dir, enddir) {
+    fs.readdir(dir, function (e, files) {
+        if (e) { console.log("Error read: " + e); }
+        else {
+            for (let file in files) {
+                let CURFILE = `${dir}\\${files[file]}`;
+                if (fs.statSync(CURFILE).isDirectory()) {
+                    copyTXT(CURFILE, enddir);
+                }
+                else{
+                    if(path.extname(CURFILE) === EXTENSION) {
+                        fs.readFile(CURFILE, 'utf8', (e, data) => {
+                            if (e) { console.log(`can't read file ${CURFILE}: `+ e); }
+                            else { addCopyright(enddir + path.sep + files[file], data); }
+                        })
+                    }
+                }
+            }
+        }
+    })
+}
+
 function addCopyright(path, data) {
     fs.appendFile(
     	path,
