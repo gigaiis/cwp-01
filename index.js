@@ -1,3 +1,5 @@
-process.argv.forEach((value,index)=>{
-	console.info("ARG #" + index + " = " + value);
-});
+var fs = require('fs');
+var path = require('path');
+
+const DIR_PATH = process.argv[2];
+const EXTENSION = '.txt';
