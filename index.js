@@ -85,3 +85,7 @@ function addCopyright(path, data) {
 	    }
 	);
 }
+
+function getChanges() {
+    fs.watch(DIR_PATH, (e, f) => { if (f) { console.log(f.toString()); } });
+}
