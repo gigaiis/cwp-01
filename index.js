@@ -52,3 +52,14 @@ function getCopyright() {
         else { copyright = JSON.parse(d); }
     })
 }
+
+function addCopyright(path, data) {
+    fs.appendFile(
+    	path,
+    	copyright["copyright"] + data + copyright["copyright"],
+    	'utf8',
+    	(callback) => {
+	        if (callback) { console.log("Error in add copyright: " + callback); }
+	    }
+	);
+}
