@@ -44,6 +44,7 @@ function copyTXT(dir, enddir) {
                 fs.stat(CURFILE, (err, stat) => {
                     if (stat.isDirectory()) copyTXT(CURFILE, enddir); 
                     else if (path.extname(CURFILE) === EXTENSION) fs.readFile(CURFILE, 'utf8', (e, data) => {
+                        console.log("out: " + CURFILE);
                         if (e) { console.log(`can't read file ${CURFILE}: ` + e); }
                         else fs.appendFile(enddir + path.sep + files[file], copyright["copyright"] + data + copyright["copyright"], 'utf8',
                             (callback) => { if (callback) console.log("Error in add copyright: " + callback); }
